@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:greengrocer/src/auth/sign_in_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,8 +12,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      home: FloatingActionButton(onPressed: () {}),
+      debugShowCheckedModeBanner: false,
+      title: 'Green Grocer',
+      theme: ThemeData(
+        primarySwatch: Colors.green,
+      ),
+      home: const SignInScreen(),
     );
   }
 }
