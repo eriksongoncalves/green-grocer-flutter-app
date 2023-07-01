@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+
+import 'package:greengrocer/src/components/payment_dialog.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
 import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/pages/cart/components/cart_tile.dart';
@@ -124,7 +126,22 @@ class _CartTabState extends State<CartTab> {
                     onPressed: () async {
                       bool? result = await showOrderConfirmation();
 
-                      print('>>> result $result');
+                      if (result ?? false) {
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return PaymentDialog(
+                              order: appData.orders.first,
+                            );
+                          },
+                        );
+                      } else {
+                        utilsServices.showToast(
+                          message: 'Pedido não confirmado',
+                          isError: true,
+                        );
+                      }
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: CustomColors.customSwatchColor,
